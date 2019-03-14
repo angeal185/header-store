@@ -2,7 +2,7 @@ _.templateSettings.interpolate = /{{([\s\S]+?)}}/g;
 let csl = chrome.storage.local;
 
 const div = $('<div />'),
-optBaseTpl = _.template('<div id="rules-box" class="w90"><h3><span id="ttl"></span><span id="profile" class="right">profile: </span></h3><hr></div><canvas id="canvas"></canvas>'),
+optBaseTpl = _.template('<div id="rules-box" class="w90"><h3><span id="ttl"></span><span id="profile" class="right">profile: </span></h3><hr></div>'),
 divClsTpl = _.template('<div class="{{CLS}}">{{BODY}}</div>'),
 navTpl = _.template('<nav><div class="logo left"><img src="/app/img/icon_32x32.png" height="50px"></div><ul id="navLinks" class="right"></ul></nav>'),
 bottomNavTpl = _.template('<div class="nav-bottom"><div class="bottomNavLinks right"></div></div>'),

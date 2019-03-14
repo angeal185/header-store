@@ -15,6 +15,7 @@ $(document).ready(function () {
   if  (!_.eq(localStorage.getItem('current_url'),'login')){
     buildOptMain()
     logout()
+    versionInt()
   } else {
     buildLogin()
   }

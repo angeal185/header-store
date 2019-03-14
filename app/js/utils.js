@@ -70,7 +70,11 @@ function newUser(i, ver){
       data: arr,
       status:'unlock',
       verify: ver,
-      profile:0
+      profile:0,
+      version:{
+        lastCheck: date.now(),
+        toDate: true
+      }
     })
     toasty('user ' + i.username + ' successfully created')
     reload(1000)
@@ -425,20 +429,65 @@ function getVersion(){
   return chrome.runtime.getManifest().version;
 }
 
-function checkVersion(){
-  $.ajax({
-    url: '/path/to/file',
-    type: 'GET',
-    dataType: 'json',
-    data: {param1: 'value1'}
-  })
-  .done(function(data) {
+function checkVersion(i){
 
-    parseInt(_.replace(getVersion(), /\./g, ''))
-    console.log("success");
-  })
-  .fail(function() {
-    toasty("unable to check for updates");
-  })
+  if(i.version.toDate){
+    $.ajax({
+      url: 'https://raw.githubusercontent.com/angeal185/header-store/master/package.json',
+      type: 'GET',
+      dataType: 'json'
+    })
+    .done(function(data) {
+      try {
+        let current = parseInt(_.replace(data.version, /\./g, '')),
+        app = parseInt(_.replace(getVersion(), /\./g, ''));
+        if(_.gt(current,app)){
+          i.version.toDate = false;
+          csl.set(i)
+          vc('orange')
+          toasty('update available')
+        } else {
+          i.version.lastCheck = Date.now();
+          csl.set(i)
+          vc('green')
+          toasty('up to date')
+        }
+      } catch (err) {
+        if (err) {
+          vc('red')
+          toasty("unable to check for updates");
+        }
+      }
+    })
+    .fail(function() {
+      vc('red')
+      toasty("unable to check for updates");
+    })
+  } else {
+    vc('orange')
+    toasty('update available')
+  }
 
+}
+
+function versionInt(){
+  csl.get(function(i){
+    if(!i.version.toDate){
+      vc('orange')
+      toasty('update available')
+      return;
+    }
+
+    if(_.lt((i.version.lastCheck + 10800000), Date.now())){
+      checkVersion(i)
+    } else {
+      vc('green')
+      toasty('up to date')
+    }
+    return;
+  })
+}
+
+function vc(i){
+  $('.version').addClass(i)
 }
