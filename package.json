@@ -1,0 +1,20 @@
+{
+  "name": "header-store",
+  "version": "1.0.0",
+  "description": "chrome extension for header modifications on a per site basis with user login and encrypted storage",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/angeal185/header-store.git"
+  },
+  "author": "ben eaves",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/angeal185/header-store/issues"
+  },
+  "homepage": "https://github.com/angeal185/header-store#readme"
+}

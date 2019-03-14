@@ -1,0 +1,38 @@
+{
+  "manifest_version": 2,
+  "name": "header-store",
+  "description": "chrome extension for header modifications on a per site basis with user login and encrypted storage",
+  "version": "1.0.0",
+  "permissions": [
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "unlimitedStorage",
+    "contentSettings",
+    "storage",
+    "privacy",
+    "http://*/*",
+    "https://*/*",
+    "system.cpu"
+  ],
+  "icons": {
+    "16": "app/img/icon_16x16.png",
+    "48": "app/img/icon_48x48.png",
+    "128": "app/img/icon_128x128.png"
+  },
+  "options_page": "options.html",
+  "browser_action": {
+    "default_icon": "app/img/icon_128x128.png",
+    "default_title": "header-store",
+    "default_popup": "index.html"
+  },
+  "background": {
+    "scripts": [
+      "app/js/vendor.js",
+      "app/js/utils.js",
+      "app/js/background.js"
+    ],
+    "persistent": true
+  },
+  "content_security_policy": "script-src 'unsafe-eval' 'self';  object-src 'self'"
+}
