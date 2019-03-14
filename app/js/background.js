@@ -17,7 +17,7 @@ function changeFilter(){
   try{
     csl.get(function(i) {
       if ( !_.isInteger(i.profile) || !_.eq(i.status, 'unlock')) {
-        console.log('no')
+        console.log('no user detected')
         return;
       }
 
@@ -35,7 +35,6 @@ function changeFilter(){
         filter.types = i.data[i.profile].types;
       }
       ls.set('filter', filter)
-      //ls.set('filter',filter)
     })
   } catch(e){
     if(e) { return console.log(e) }
